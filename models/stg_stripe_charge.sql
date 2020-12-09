@@ -6,8 +6,14 @@ with charge as (
 ), fields as (
 
     select 
+      charge.metadata_customer_email AS woocommerce_email,
+      charge.metadata_payer_email AS woocommerce_email_2,
+      metadata_user_id as user_id,
+      metadata_subscription_id as subscription_id,
+      metadata_moltin_order_id as moltin_order_id,
       id as charge_id, 
       amount,
+      refunded,
       amount_refunded,
       application_fee_amount,
       balance_transaction_id,
@@ -25,9 +31,14 @@ with charge as (
       receipt_number,
       refunded as is_refunded,
       status,
-      invoice_id
-    from charge
-    
+      invoice_id,
+      captured,
+      livemode,
+      charge.metadata_order_number,
+      outcome_seller_message,
+      outcome_type,
+      paid
+      from charge
 )
 
 select *
